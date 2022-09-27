@@ -17,6 +17,8 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+
+import config.Configuration;
 import model.Client;
 import org.w3c.dom.Document;
 
@@ -48,7 +50,7 @@ public class DOMBasicExample {
         //Load and Parse the XML document
         //document contains the complete XML as a Tree.
         Document document = builder.parse(Files.newInputStream(Paths
-                                            .get("xmlFiles/client.xml")));
+                                            .get(Configuration.getInstance().getProperty("xmlClientPath"))));
 
         // Shows the number of clients in the document. 
         int nrClients= document.getElementsByTagName("client").getLength();
@@ -89,7 +91,8 @@ public class DOMBasicExample {
         // Generates the DOM document and saves it into an XML file
 	Source source = new DOMSource(document);
 			
-	Result result = new StreamResult(Files.newOutputStream(Paths.get("xmlFiles/client.xml"))); // name of the file
+	Result result = new StreamResult(Files.newOutputStream(Paths
+            .get(Configuration.getInstance().getProperty("xmlClientPath")))); // name of the file
 																				
 	Transformer transformer = TransformerFactory.newInstance().newTransformer();
 	transformer.transform(source, result);

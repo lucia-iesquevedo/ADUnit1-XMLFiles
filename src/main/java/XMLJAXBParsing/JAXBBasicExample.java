@@ -10,14 +10,14 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
+
+import config.Configuration;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.Marshaller;
+import jakarta.xml.bind.Unmarshaller;
 import model.Address;
 import model.Employee;
 import model.Employees;
-
-
 /**
  *
  * @author Lucia
@@ -36,8 +36,10 @@ public class JAXBBasicExample {
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
         Unmarshaller unmarshaller = context.createUnmarshaller();
-        Path xmlFile= Paths.get("xmlFiles/employee.xml");
-        // Reads the XML document from the file
+        Path xmlFile= Paths
+                .get(Configuration.getInstance().getProperty("xmlEmployeePath"));
+
+        // Read the XML document from the file
         Employees empList = (Employees) unmarshaller.unmarshal(Files.newInputStream(xmlFile));
 
         System.out.println("********* Result of reading XML document from the file***************");
@@ -46,7 +48,7 @@ public class JAXBBasicExample {
 
         // Add a new employee to the XML file
         Address address=new Address("Gran via", 5);
-        Employee emp= new Employee("Mary","Johnson", address, LocalDate.parse("2016-08-16"));
+        Employee emp= new Employee("Mary2","Johnson2", address, LocalDate.parse("2016-08-16"));
         empList.addEmployee(emp);
 
         //Load the result to the file
