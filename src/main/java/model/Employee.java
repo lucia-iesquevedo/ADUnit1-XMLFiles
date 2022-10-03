@@ -4,6 +4,7 @@ package model;
 import XMLJAXBParsing.LocalDateAdapter;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -12,9 +13,11 @@ import java.time.LocalDate;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Employee{
-    
+    @XmlElement
     private String firstName;
+    @XmlElement
     private String lastName;
+    @XmlElement
     private Address address;
     
     @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
@@ -53,7 +56,7 @@ public class Employee{
         return address;
     }
 
-    
+
     public void setAddress(Address address) {
         this.address = address;
     }
