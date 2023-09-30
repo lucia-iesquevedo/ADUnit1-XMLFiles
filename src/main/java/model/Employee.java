@@ -2,23 +2,25 @@
 package model;
 
 import XMLJAXBParsing.LocalDateAdapter;
-import jakarta.xml.bind.annotation.XmlAccessType;
-import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlElement;
-import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.*;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import java.time.LocalDate;
+import java.util.List;
 
-@XmlRootElement
+@XmlRootElement(name="employee")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Employee{
-    @XmlElement
+    @XmlElement(name="fName")
     private String firstName;
     @XmlElement
     private String lastName;
     @XmlElement
     private Address address;
+
+    @XmlElementWrapper(name="phones")
+    @XmlElement(name="phone")
+    private List<Phone> phones;
     
     @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
     private LocalDate startDate;
@@ -27,14 +29,14 @@ public class Employee{
     public Employee() {
     }
 
-    public Employee(String firstName, String lastName, Address address, LocalDate startDate) {
+    public Employee(String firstName, String lastName, Address address, List<Phone> phones, LocalDate startDate) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
+        this.phones = phones;
         this.startDate = startDate;
     }
 
-    
     public String getFirstName() {
         return firstName;
     }
@@ -71,8 +73,12 @@ public class Employee{
 
     @Override
     public String toString() {
-        return "Employee{" + "firstName=" + firstName + ", lastName=" + lastName + ", address=" + address + ", startDate=" + startDate + '}';
+        return "Employee{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", address=" + address +
+                ", phones=" + phones +
+                ", startDate=" + startDate +
+                '}';
     }
-    
-    
 }

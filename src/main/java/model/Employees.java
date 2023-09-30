@@ -3,6 +3,7 @@ package model;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
 import java.util.ArrayList;
@@ -11,26 +12,26 @@ import java.util.List;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Employees{
-    
-    private List<Employee> employee;
+    @XmlElement(name="employee")
+    private List<Employee> employees;
             
     public Employees() {
-        employee=new ArrayList<>();}
+        employees=new ArrayList<>();}
 
     public List<Employee> getEmployee() {
-        return employee;
+        return employees;
     }
 
     public void setEmployee(List<Employee> listEmp) {
-        this.employee = listEmp;
+        this.employees = listEmp;
     }
     
     public void addEmployee(Employee e) {
-        employee.add(e);
+        employees.add(e);
     }
  
     @Override
     public String toString() {
-        return "Employees{" + "employee=" + employee + '}';
+        return "Employees{" + "employee=" + employees + '}';
     }
 }

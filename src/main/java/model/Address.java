@@ -35,8 +35,6 @@ public class Address {
             return "Address [Street=" + street + ", number=" + number + "]";
     }
 	
-	
-	
 }
 
 
